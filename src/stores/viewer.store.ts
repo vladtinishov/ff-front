@@ -15,7 +15,7 @@ export const useViewerStore = defineStore('viewer', {
           login: 'kostya',
           password: 'test',
           role: 1,
-        }
+        },
       }
     },
     getters: {
@@ -24,6 +24,7 @@ export const useViewerStore = defineStore('viewer', {
       }
     },
     actions: {
+
     },
   }
 )

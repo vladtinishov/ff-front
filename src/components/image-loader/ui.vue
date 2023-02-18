@@ -54,24 +54,18 @@ const onConfirm = () => {
         <input ref="files" @change="onFileSelect()" accept="image/*" class="hidden" type="file"/>
       </label>
     </div>
-    <n-modal v-model:show="showModal">
-      <n-card
-        style="width: 600px"
-        :bordered="false"
-        size="huge"
-        role="dialog"
-        aria-modal="true"
-      >
-        <Cropper
-          ref="cropper"
-          style="z-index: 999"
-          :stencil-component="CircleStencil"
-          :src="avatarSrc"
-          :coordinates="coordinates"
-        />
-        <n-button class="mt-4" @click="onConfirm">{{  $t('avatarLoader.confirm') }}</n-button>
-      </n-card>
-    </n-modal>
+    <a-modal v-model:visible="showModal">
+      <Cropper
+        ref="cropper"
+        style="z-index: 999"
+        :stencil-component="CircleStencil"
+        :src="avatarSrc"
+        :coordinates="coordinates"
+      />
+      <template #footer>
+        <a-button class="mt-4" @click="onConfirm">{{  $t('avatarLoader.confirm') }}</a-button>
+      </template>
+    </a-modal>
   </div>
 </template>
 
@@ -88,6 +82,10 @@ const onConfirm = () => {
 
   img {
     border-radius: 3px;
+  }
+
+  input {
+    display: none !important;
   }
 }
 </style>

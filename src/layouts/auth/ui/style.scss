@@ -1,0 +1,65 @@
+.container {
+  display: flex;
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  background: #020202;
+
+ 
+  .banner {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-image: url('./signup.jpg');
+    width: 100%;
+    background-size: 100%;
+    background-repeat: no-repeat;
+    background-position: center;
+    
+
+    .bannerText {
+      display: flex;
+      justify-content: center;
+      flex-direction: column;
+      color: white;
+      border-radius: 10px;
+      background: black;
+      .title {
+        font-size: 64px;
+        font-weight: 700;
+        line-height: 64px;
+
+        p {
+          margin-bottom: 0;
+        }
+      }
+
+      .slogan {
+        font-size: 20px;
+        margin-top: 30px;
+      }
+    }
+  }
+
+  .form {
+    width:100% !important;
+    height: 100%;
+    box-shadow: 1px 1px 1px 1px black;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: white;
+
+    .header {
+      display: flex;  
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 50px;
+
+      a {
+        font-size: 17px;
+      }
+    }
+  }
+}

@@ -5,6 +5,7 @@ import { useViewerStore } from '@/stores/viewer.store';
 import { storeToRefs } from 'pinia';
 import { ImageLoader } from '@/components/image-loader'
 import { useI18n } from 'vue-i18n';
+import { NButton } from 'naive-ui'
 
 const viewerStore = useViewerStore()
 const { t } = useI18n()
@@ -67,39 +68,42 @@ function handleValidateClick(e: MouseEvent) {
 </script>
 
 <template>
-  <n-form ref="formRef" :label-width="80" :model="formValue" :rules="rules" :size="size">
-    <div class="ml-4">
+  <a-form ref="formRef" :label-width="80" :model="formValue" :rules="rules" :size="size">
+    <div class="ml-4 w-96">
       <div>
         <span>{{ $t("viewer.avatar") }}</span>
         <ImageLoader class="mt-2" />
       </div>
-      <div class="flex mt-6">
-        <n-form-item :label="$t('viewer.name')" path="name">
-          <n-input v-model:value="formValue.name" placeholder="Ivan" />
-        </n-form-item>
-        <n-form-item class="ml-4" :label="$t('viewer.surname')" path="surname">
-          <n-input v-model:value="formValue.surname" placeholder="Ivanov" />
-        </n-form-item>
+      <div class="flex mt-5">
+        <a-form-item>
+          <span>{{ $t('viewer.name') }}</span>
+          <a-input v-model:value="formValue.name" placeholder="Ivan" />
+        </a-form-item>
+        <div class="mx-1"></div>
+        <a-form-item class="ml-4">
+          <span>{{ $t('viewer.surname') }}</span>
+          <a-input v-model:value="formValue.surname" placeholder="Ivanov" />
+        </a-form-item>
       </div>
-      <n-form-item :label="$t('viewer.login')" path="login">
-        <n-input v-model:value="formValue.login" placeholder="ivan.ivanych" />
-      </n-form-item>
-      <n-form-item :label="$t('viewer.password')" path="password">
-        <n-input v-model:value="formValue.password" placeholder="" />
-      </n-form-item>
-      <n-form-item :label="$t('viewer.lang')" path="lang">
-        <n-input v-model:value="formValue.lang" placeholder="Phone Number" />
-      </n-form-item>
-      <n-form-item :label="$t('viewer.aboutCompany')" path="aboutCompany">
-        <n-input
-          v-model:value="formValue.aboutCompany"
-          type="textarea"
-          :placeholder="$t('viewer.aboutCompany')"
-        />
-      </n-form-item>
-      <n-form-item>
-        <n-button type="primary">{{ $t('shared.save') }}</n-button>
-      </n-form-item>
+      <a-form-item>
+        <span>{{ $t('viewer.login') }}</span>
+        <a-input v-model:value="formValue.login" placeholder="ivan.ivanych" />
+      </a-form-item>
+      <a-form-item>
+        <span>{{  $t('viewer.password')  }}</span>
+        <a-input v-model:value="formValue.password" placeholder="" />
+      </a-form-item>
+      <a-form-item>
+        <span>{{ $t('viewer.lang') }}</span>
+        <a-input v-model:value="formValue.lang" placeholder="Phone Number" />
+      </a-form-item>
+      <a-form-item>
+        <span>{{ $t('viewer.aboutCompany') }}</span>
+        <a-textarea v-model:value="formValue.aboutCompany" :placeholder="$t('viewer.aboutCompany')" :rows="4" />
+      </a-form-item>
+      <a-form-item>
+        <a-button type="primary">{{ $t('shared.save') }}</a-button>
+      </a-form-item>
     </div>
-  </n-form>
+  </a-form>
 </template>
