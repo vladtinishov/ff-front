@@ -47,7 +47,7 @@ const { langs } = storeToRefs(appStore)
 		</a-form-item>
 		<a-form-item name="password" :rules="[{ required: true, message: $t('errors.emptyField') }]">
 			<span>{{ $t('viewer.password') }}</span>
-			<a-input v-model:value="formValue.password" placeholder="" />
+			<a-input v-model:value="formValue.password" :placeholder="$t('viewer.passwordPlaceholder')" />
 		</a-form-item>
 		<a-form-item name="lang" :rules="[{ required: true, message: $t('errors.emptyField') }]">
 			<span>{{ $t('viewer.lang') }}</span>

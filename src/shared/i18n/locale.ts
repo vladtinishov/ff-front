@@ -14,7 +14,8 @@ export const messages = {
         login: 'Логин',
         password: 'Пароль',
         aboutFreelance: 'Самое крутое о себе',
-        aboutCompany: 'Самое крутое о компании'
+        aboutCompany: 'Самое крутое о компании',
+        passwordPlaceholder: 'ТвойКРУТОЙиСАмЫЙЛУчшийПароль'
       },
       avatarLoader: {
         title: 'Загрузка аватара',
