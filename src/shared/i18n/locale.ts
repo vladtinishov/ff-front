@@ -27,6 +27,7 @@ export const messages = {
       },
       shared: {
         save: 'Сохранить',
+        toNext: 'Дальше',
       }
     },
     en: {

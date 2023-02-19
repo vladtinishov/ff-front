@@ -1,31 +1,48 @@
 <script lang="ts" setup>
 import { ref } from 'vue'
-import type { FormInst, UploadFileInfo } from 'naive-ui'
-import { useViewerStore } from '@/stores/viewer.store';
-import { storeToRefs } from 'pinia';
+import { useViewerStore } from '@/stores/viewer.store'
+import { storeToRefs } from 'pinia'
 import { ImageLoader } from '@/components/image-loader'
-import { useI18n } from 'vue-i18n';
-import { NButton } from 'naive-ui'
-import { useAppStore } from '@/stores/app.store';
+import { useAppStore } from '@/stores/app.store'
+import { useRouter } from 'vue-router'
 
+interface ViewerData {
+	name: string,
+	surname: string,
+	login: string,
+	password: string,
+	lang: string,
+	about: string
+	role: number
+}
 const viewerStore = useViewerStore()
 const appStore = useAppStore()
+const router = useRouter()
 
-const formValue = ref({
+const formValue = ref<ViewerData>({
 	name: '',
 	surname: '',
 	login: '',
 	password: '',
 	lang: 'ru',
-	aboutCompany: '',
+	about: '',
+	role: 1
 })
 
 const { langs } = storeToRefs(appStore)
 
+
+// methods
+const onSubmit = async (data: ViewerData) => {
+	console.log('asdfasdf')
+	await viewerStore.signupUser(data)
+	router.push({ name: 'home' })
+
+}
 </script>
 
 <template>
-	<a-form :label-width="80" :model="formValue">
+	<a-form :label-width="80" :model="formValue" @finish="onSubmit">
 		<div>
 			<span>{{ $t("viewer.avatar") }}</span>
 			<ImageLoader class="mt-2" />
@@ -53,9 +70,9 @@ const { langs } = storeToRefs(appStore)
 			<span>{{ $t('viewer.lang') }}</span>
 			<a-select v-model:value="formValue.lang" :options="langs"></a-select>
 		</a-form-item>
-		<a-form-item name="aboutCompany" :rules="[{ required: true, message: $t('errors.emptyField') }]">
+		<a-form-item name="about" :rules="[{ required: true, message: $t('errors.emptyField') }]">
 			<span>{{ $t('viewer.aboutCompany') }}</span>
-			<a-textarea v-model:value="formValue.aboutCompany" :placeholder="$t('viewer.aboutCompany')" :rows="4" />
+			<a-textarea v-model:value="formValue.about" :placeholder="$t('viewer.aboutCompany')" :auto-size="{ minRows: 4, maxRows: 4 }" />
 		</a-form-item>
 		<a-form-item>
 			<a-button type="primary" html-type="submit">{{ $t('shared.save') }}</a-button>

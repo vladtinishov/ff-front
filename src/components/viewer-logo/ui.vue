@@ -11,7 +11,6 @@ import { useViewerStore } from '@/stores/viewer.store'
 import { storeToRefs } from 'pinia'
 
 const viewerStore = useViewerStore()
-const { local } = storeToRefs(viewerStore)
 
 const renderIcon = (icon: Component) => {
   return () => {
@@ -22,21 +21,21 @@ const renderIcon = (icon: Component) => {
 }
 
 const options = [
-	{
-		label: local.value.viewer.preferences,
-		key: 'profile',
-		icon: renderIcon(UserIcon)
-	},
-	{
-		label: local.value.viewer.applications,
-		key: 'editProfile',
-		icon: renderIcon(EditIcon)
-	},
-	{
-		label: local.value.viewer.exit,
-		key: 'logout',
-		icon: renderIcon(LogoutIcon)
-	}
+	// {
+	// 	label: local.value.viewer.preferences,
+	// 	key: 'profile',
+	// 	icon: renderIcon(UserIcon)
+	// },
+	// {
+	// 	label: local.value.viewer.applications,
+	// 	key: 'editProfile',
+	// 	icon: renderIcon(EditIcon)
+	// },
+	// {
+	// 	label: local.value.viewer.exit,
+	// 	key: 'logout',
+	// 	icon: renderIcon(LogoutIcon)
+	// }
 ]
 
 </script>
@@ -44,7 +43,7 @@ const options = [
 <template>
 	<n-dropdown :options="options" trigger="click">
     <div :class="$style.viewerContainer">
-		<div :class="$style.viewerInfo">
+		<!-- <div :class="$style.viewerInfo">
 			<n-ellipsis :class="$style.name">
 				Константин
 			</n-ellipsis>
@@ -54,7 +53,7 @@ const options = [
 			round
 			size="small"
 			src="https://07akioni.oss-cn-beijing.aliyuncs.com/07akioni.jpeg"
-		/>
+		/> -->
 		</div>
   </n-dropdown>
 </template>
