@@ -1,4 +1,4 @@
-import type { ViewerDto } from "@/shared/api-logic";
+import type { ViewerDto } from "@/shared/api";
 
 export interface ViewerType {
     viewer: ViewerDto

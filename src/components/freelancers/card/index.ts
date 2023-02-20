@@ -1,0 +1,1 @@
+export { default as FreelancerCard } from './ui.vue'

@@ -2,9 +2,11 @@ import { ref, computed } from 'vue'
 import { defineStore } from 'pinia'
 import type { ViewerType } from './types/viewer.type'
 import { LOCAL } from '@/shared/local'
-import { useAuthLogic } from '@/shared/api-logic'
-import type { ViewerDto, AuthViewerDto } from "@/shared/api-logic";
+import * as API from '@/shared/api'
+import type { ViewerDto, AuthViewerDto } from "@/shared/api";
 import { useRouter } from 'vue-router'
+import { getCookie, setCookie } from '@/shared/utils'
+import { ACCESS_TOKEN } from '@/stores/constants'
 
 export const useViewerStore = defineStore('viewer', {
     state: (): ViewerType => {
@@ -22,19 +24,38 @@ export const useViewerStore = defineStore('viewer', {
       }
     },
     getters: {
+      isAccessTokenSet() {
+        return !!getCookie(ACCESS_TOKEN)
+      }
     },
     actions: {
-      async signupUser(data: ViewerDto) {
-        useAuthLogic.setUser(data)
+      async signupUser(dto: ViewerDto) {
+        const res = await API.auth.signup(dto)
 
-        this.getViewer(data)
+        if (!res?.accessToken) return false
+
+        setCookie(ACCESS_TOKEN, res.accessToken)
+
+        return true
       },
+
+      async loginUser(dto: AuthViewerDto) {
+        const res= await API.auth.login(dto)
+        
+        if (!res?.accessToken) return false
+
+        setCookie(ACCESS_TOKEN, res.accessToken)
+
+        return true
+      },
+
       async getViewer(dto: AuthViewerDto) {
-        const viewer = await useAuthLogic.getViewer(dto)
+        console.log('loged')
+        // const viewer = await useAuthLogic.getViewer(dto)
 
-        if (!viewer) return false
+        // if (!viewer) return false
 
-        this.viewer = viewer
+        // this.viewer = viewer
       }
     },
   }

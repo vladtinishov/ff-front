@@ -30,7 +30,7 @@ const props = defineProps<Props>()
 		</div>
 		<div v-else>
 			<div :class="$style.loginContainer">
-				<OrderMessage />
+				<!-- <OrderMessage /> -->
 				<div :class="$style.form">
 					<div :class="$style.header">
 						<img src="@/assets/logo.svg" alt="">

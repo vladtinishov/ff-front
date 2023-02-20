@@ -1,0 +1,1 @@
+export const ACCESS_TOKEN = 'ff-access-token'

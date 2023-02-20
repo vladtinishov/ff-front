@@ -1,13 +1,19 @@
 <script setup lang="ts">
-import { RouterLink, RouterView, useRoute } from 'vue-router'
+import { RouterLink, RouterView, useRoute, useRouter } from 'vue-router'
 import { MainLayout } from '@/layouts/main'
 import { useAppStore } from './stores/app.store';
 import { AuthLayout } from './layouts/auth';
-import { computed } from 'vue'
+import { computed, onMounted } from 'vue'
+import { useViewerStore } from './stores/viewer.store';
+import { storeToRefs } from 'pinia';
+
 const appStore = useAppStore()
-appStore.init()
+const viewerStore = useViewerStore()
 
 const route = useRoute()
+const router = useRouter()
+
+const { isAccessTokenSet } = storeToRefs(viewerStore)
 
 const isAuthPage = computed(() => {
   const AUTH_PAGES = ['signup', 'login']
@@ -16,6 +22,13 @@ const isAuthPage = computed(() => {
 
 const isLogin = computed(() => {
   return <string>route.name == 'login'
+})
+
+onMounted(() => {
+  if (!isAccessTokenSet.value) router.push({ name: 'login' })
+  if (isLogin.value && isAccessTokenSet.value) return router.push({ name: 'home' })
+
+  appStore.init()
 })
 </script>
 

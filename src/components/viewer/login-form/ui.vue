@@ -19,7 +19,7 @@ const formValue = ref<LoginData>({
 
 // methods
 const onSubmit = async (data: LoginData) => {
-	const isValid = await viewerStore.getViewer(data)
+	const isValid = await viewerStore.loginUser(data)
 	if (isValid) router.push({ name: 'home' })
 }
 </script>
