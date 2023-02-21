@@ -1,6 +1,5 @@
 <script lang="ts" setup>
 import { OrderMessage } from '@/components/order'
-import { defineProps } from 'vue';
 
 interface Props {
 	isLogin: boolean

@@ -1,0 +1,9 @@
+<script setup lang="ts">
+import { FreelancerForm } from '@/components/freelancers/form';
+</script>
+
+<template>
+  <div class="mt-5">
+    <FreelancerForm />
+  </div>
+</template>

@@ -5,6 +5,7 @@ import { LOCAL } from '@/shared/local'
 import * as API from '@/shared/api'
 import type { AppType } from './types/app.type'
 import { LANGS } from '@/shared/models'
+import { useUsersStore } from './users.store'
 
 export const useAppStore = defineStore('app', {
   state: (): AppType => {
@@ -18,6 +19,7 @@ export const useAppStore = defineStore('app', {
   actions: {
     init() {
       this.langs = LANGS
+      useUsersStore().getFreelancers()
     }
   },
 }

@@ -1,12 +1,12 @@
 <script setup lang="ts">
-import { FreelancerCard } from '@/components/freelancers';
+import { FreelancersList } from '@/components/freelancers/list';
 
 </script>
 
 <template>
   <main>
-    <div>
-      <FreelancerCard />
+    <div class="flex mt-5">
+      <FreelancersList />
     </div>
   </main>
 </template>

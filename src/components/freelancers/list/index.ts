@@ -1,0 +1,1 @@
+export { default as FreelancersList } from './ui.vue'

@@ -1,0 +1,1 @@
+export { default as FreelancerRow } from './ui.vue'

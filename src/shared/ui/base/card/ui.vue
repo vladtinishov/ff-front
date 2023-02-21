@@ -1,14 +1,16 @@
 <script lang="ts" setup>
 interface Props {
   width?: number
+  isRow?: boolean
 }
 
 const props = withDefaults(defineProps<Props>(), {
-  width: 400
+  width: 400,
+  isRow: false
 })
 
 const style = {
-  width: props.width + 'px'
+  width: props.isRow ? '100%' : props.width + 'px'
 }
 </script>
 
@@ -20,6 +22,10 @@ const style = {
 
     <div :class="$style.metaLarge">
       <slot name="meta-large"></slot>
+    </div>
+
+    <div :class="$style.metaRow">
+      <slot name="meta-row"></slot>
     </div>
 
 
