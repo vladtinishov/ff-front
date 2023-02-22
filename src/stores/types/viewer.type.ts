@@ -1,5 +1,6 @@
-import type { ViewerDto } from "@/shared/api";
+import type { UserDto, ViewerDto } from "@/shared/api";
 
 export interface ViewerType {
-    viewer: ViewerDto
+    viewer: UserDto
+    isLoading: boolean,
 }

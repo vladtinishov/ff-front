@@ -5,39 +5,38 @@ import { storeToRefs } from 'pinia'
 import { ImageLoader } from '@/components/image-loader'
 import { useAppStore } from '@/stores/app.store'
 import { useRouter } from 'vue-router'
+import type { UserDto } from '@/shared/api'
 
-interface ViewerData {
-	name: string,
-	surname: string,
-	login: string,
-	password: string,
-	lang: string,
-	about: string
-	role: number
+interface Props {
+	role: 1 | 2
 }
+
+const props = withDefaults(defineProps<Props>(), { role: 1 })
+
 const viewerStore = useViewerStore()
 const appStore = useAppStore()
 const router = useRouter()
 
-const formValue = ref<ViewerData>({
+const formValue = ref<UserDto>({
 	name: '',
 	surname: '',
+	companyName: '',
 	login: '',
 	password: '',
 	lang: 'ru',
 	about: '',
-	role: 1
+	likes: 0,
+	role: props.role
 })
 
 const { langs } = storeToRefs(appStore)
+const { isLoading } = storeToRefs(viewerStore)
 
 
 // methods
-const onSubmit = async (data: ViewerData) => {
-	console.log('asdfasdf')
-	await viewerStore.signupUser(data)
-	router.push({ name: 'home' })
-
+const onSubmit = async (data: UserDto) => {
+	await viewerStore.signupUser(formValue.value)
+	router.push({ name: 'me' })
 }
 </script>
 
@@ -47,7 +46,7 @@ const onSubmit = async (data: ViewerData) => {
 			<span>{{ $t("viewer.avatar") }}</span>
 			<ImageLoader class="mt-2" />
 		</div>
-		<div class="flex mt-5">
+		<div class="flex mt-5" v-if="role === 1">
 			<a-form-item name="name" :rules="[{ required: true, message: $t('errors.emptyField') }]">
 				<span>{{ $t('viewer.name') }}</span>
 				<a-input v-model:value="formValue.name" placeholder="Ivan" />
@@ -56,6 +55,12 @@ const onSubmit = async (data: ViewerData) => {
 			<a-form-item name="surname" class="ml-4" :rules="[{ required: true, message: $t('errors.emptyField') }]">
 				<span>{{ $t('viewer.surname') }}</span>
 				<a-input v-model:value="formValue.surname" placeholder="Ivanov" />
+			</a-form-item>
+		</div>
+		<div class="flex mt-5" v-else="role === 1">
+			<a-form-item name="companyName" style="width: 100%" :rules="[{ required: true, message: $t('errors.emptyField') }]">
+				<span>{{ $t('viewer.companyName') }}</span>
+				<a-input v-model:value="formValue.companyName" placeholder="TOO Company" />
 			</a-form-item>
 		</div>
 		<a-form-item name="login" :rules="[{ required: true, message: $t('errors.emptyField') }]">
@@ -71,11 +76,12 @@ const onSubmit = async (data: ViewerData) => {
 			<a-select v-model:value="formValue.lang" :options="langs"></a-select>
 		</a-form-item>
 		<a-form-item name="about" :rules="[{ required: true, message: $t('errors.emptyField') }]">
-			<span>{{ $t('viewer.aboutCompany') }}</span>
+			<span v-if="role === 1">{{ $t('viewer.aboutFreelance') }}</span>
+			<span v-else>{{ $t('viewer.aboutCompany') }}</span>
 			<a-textarea v-model:value="formValue.about" :placeholder="$t('viewer.aboutCompany')" :auto-size="{ minRows: 4, maxRows: 4 }" />
 		</a-form-item>
 		<a-form-item>
-			<a-button type="primary" html-type="submit">{{ $t('shared.save') }}</a-button>
+			<a-button :loading="isLoading" type="primary" html-type="submit">{{ $t('shared.save') }}</a-button>
 		</a-form-item>
 	</a-form>
 </template>

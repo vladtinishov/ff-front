@@ -16,12 +16,16 @@ const router = useRouter()
 const { isAccessTokenSet } = storeToRefs(viewerStore)
 
 const isAuthPage = computed(() => {
-  const AUTH_PAGES = ['signup', 'login']
+  const AUTH_PAGES = ['signup-freelancer', 'signup-customer', 'login']
   return AUTH_PAGES.includes(<string>route.name!)
 })
 
 const isLogin = computed(() => {
   return <string>route.name == 'login'
+})
+
+const isSignupFreelancer = computed(() => {
+  return <string>route.name == 'signup-freelancer'
 })
 
 onMounted(() => {
@@ -33,7 +37,7 @@ onMounted(() => {
 </script>
 
 <template>
-  <AuthLayout v-if="isAuthPage" :is-login="isLogin">
+  <AuthLayout v-if="isAuthPage" :is-login="isLogin" :is-freelancer="isSignupFreelancer">
     <RouterView />
   </AuthLayout>
   <MainLayout v-else>

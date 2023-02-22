@@ -1,0 +1,23 @@
+.container {
+  .header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+}
+
+@media (max-width: 450px) {
+  .container {
+    .header {
+      align-items: start;
+      justify-content: baseline;
+      flex-direction: column;
+
+      p {
+        text-align: left;
+        margin-top: -5px;
+        margin-bottom: 15px;
+      }
+    }
+  }
+}

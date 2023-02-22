@@ -9,21 +9,19 @@ const props = defineProps<Props>()
 
 <template>
 	<div :class="$style.container">
-		<div v-if="!props?.isLogin">
-			<div :class="$style.signupContainer">
-				<div :class="$style.banner"></div>
-				<div :class="$style.form">
-					<div>
-						<div :class="$style.header">
-							<a href="">
-								<font-awesome-icon :icon="['fa', 'chevron-left']" class="mr-2" />
-								Назад
-							</a>
-							<img src="@/assets/logo.svg" alt="">
-							<a href="">Войти</a>
-						</div>
-						<slot></slot>
+		<div :class="$style.signupContainer" v-if="!props?.isLogin">
+			<div :class="$style.banner"></div>
+			<div :class="$style.form">
+				<div>
+					<div :class="$style.header">
+						<a href="">
+							<font-awesome-icon :icon="['fa', 'chevron-left']" class="mr-2" />
+							Назад
+						</a>
+						<img src="@/assets/logo.svg" alt="">
+						<a href="">Войти</a>
 					</div>
+					<slot></slot>
 				</div>
 			</div>
 		</div>
@@ -45,5 +43,5 @@ const props = defineProps<Props>()
 </template>
 
 <style module lang="scss">
-@import './style.scss'
+@import './style.scss';
 </style>

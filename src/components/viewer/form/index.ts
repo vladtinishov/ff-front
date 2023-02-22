@@ -1,1 +1,1 @@
-export { default as VeiwerFrom } from './ui.vue'
+export { default as ViewerFrom } from './ui.vue'

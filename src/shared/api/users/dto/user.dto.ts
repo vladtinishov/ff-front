@@ -1,10 +1,11 @@
 import type { AchievementsDto } from "../../achievements"
 import type { ApplicationDto } from "../../applications"
 import type { OrderUserDto } from "../../orders"
-import type { OrderDto } from "../../orders copy/dto/order.dto"
+import type { OrderDto } from "../../orders"
 
 export interface UserDto {
   id?: number
+  companyName: string
   name: string
   surname: string
   login: string
@@ -16,5 +17,5 @@ export interface UserDto {
   achievements?: AchievementsDto[]
   orders?: OrderDto[]
   ordersUsers?: OrderUserDto[]
-  applications: ApplicationDto[]
+  applications?: ApplicationDto[]
 }
