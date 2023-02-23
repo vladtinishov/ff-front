@@ -9,8 +9,9 @@ import { getCookie, setCookie } from '@/shared/utils'
 import { ACCESS_TOKEN } from '@/stores/constants'
 
 export const useViewerStore = defineStore('viewer', {
-    state: (): ViewerType => {
+    state: () => {
       return {
+        file: {},
         viewer: {} as UserDto,
         isLoading: false,
       }
@@ -58,7 +59,27 @@ export const useViewerStore = defineStore('viewer', {
         if (!viewer) return false
 
         this.viewer = viewer
-      }
+      },
+
+      async edit(dto: UserDto) {
+        await API.auth.edit(dto)
+      },
+
+      async uploadFile(file: FormData) {
+        await API.files.uploadFiles(file)
+      },
+
+      async getOrderFiles(userId: number, orderId: number) {
+        this.file = await API.files.getOrderFiles({ orderId, userId })
+      },
+
+      async getFile(userId: number, orderId: number) {
+        await API.files.getFiles({ orderId, userId })
+      },
+
+      async getAvatar(userId: number, orderId: number) {
+        await API.files.getFiles({ orderId, userId })
+      },
     },
   }
 )

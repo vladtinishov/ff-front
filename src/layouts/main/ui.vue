@@ -13,9 +13,9 @@ const { pageTitle } = storeToRefs(appStore)
 		<nav class="bg-indigo-900">
 			<div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 relative z-50 flex justify-between py-4">
 				<div class="relative z-10 flex items-center gap-16">
-					<a aria-label="Home" href="/">
+					<router-link aria-label="Home" :to="{ name: 'home' }">
 						<img src="@/assets/logo.svg" alt="" />
-					</a>
+					</router-link>
 				</div>
 				<div class="flex items-center gap-6">
 					<font-awesome-icon :icon="['fa', 'message']" class="text-white text-xl" />

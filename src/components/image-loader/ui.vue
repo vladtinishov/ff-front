@@ -48,7 +48,7 @@ const onConfirm = () => {
     <div>
       <label :class="$style.inputLabel">
         <div>
-          <img :src="previewAvatarSrc" alt="" v-if="showPreview">
+          <img :src="previewAvatarSrc" alt="" id="avatar" v-if="showPreview">
           <font-awesome-icon :icon="['fa', 'user']" class="text-white text-5xl" v-else />
         </div>
         <input ref="files" @change="onFileSelect()" accept="image/*" class="hidden" type="file"/>

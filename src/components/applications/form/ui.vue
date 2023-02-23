@@ -135,16 +135,16 @@ const onDelete = async () => {
 
       <FSection class="mt-5">
         <div :class="$style.sectionInner">
-          <h1 class="text-2xl">Опыт работы</h1>
+          <h1 class="text-2xl">Специализация</h1>
           <a-form :label-width="80" :model="application">
-            <a-form-item name="langs" :rules="[{ required: true, message: $t('errors.emptyField') }]">
-              <span>{{ $t('application.langs') }}</span>
-              <a-select v-model:value="application.specializationid" :placeholder="$t('application.langs')"
+            <a-form-item name="specializationid" :rules="[{ required: true, message: $t('errors.emptyField') }]">
+              <span>{{ $t('application.specialization') }}</span>
+              <a-select v-model:value="application.specializationid" :placeholder="$t('application.specialization')"
                 :options="specializations">
               </a-select>
             </a-form-item>
-            <a-form-item name="langs" :rules="[{ required: true, message: $t('errors.emptyField') }]">
-              <span>{{ $t('application.langs') }}</span>
+            <a-form-item name="hasExpirience" :rules="[{ required: true, message: $t('errors.emptyField') }]">
+              <span>{{ $t('application.hasExpirience') }}</span>
               <a-switch style="margin-left: 10px;" v-model:checked="application.hasExpirience" />
             </a-form-item>
             <div>
@@ -185,15 +185,15 @@ const onDelete = async () => {
           <h1 class="text-2xl">Образование</h1>
           <a-form :label-width="80" :model="application">
             <a-form-item name="name" :rules="[{ required: true, message: $t('errors.emptyField') }]">
-              <span>{{ $t('application.name') }}</span>
+              <span>{{ $t('application.educationName') }}</span>
               <a-input v-model:value="application.education.name" placeholder="OOO Keremet" />
             </a-form-item>
-            <a-form-item name="education.grade" :rules="[{ required: true, message: $t('errors.emptyField') }]">
+            <a-form-item name="education.educationGrade" :rules="[{ required: true, message: $t('errors.emptyField') }]">
               <span>{{ $t('application.name') }}</span>
               <a-input v-model:value="application.education.grade" placeholder="OOO Keremet" />
             </a-form-item>
             <a-form-item name="education.specialization" :rules="[{ required: true, message: $t('errors.emptyField') }]">
-              <span>{{ $t('application.name') }}</span>
+              <span>{{ $t('application.educationSpecialization') }}</span>
               <a-input v-model:value="application.education.specialization" placeholder="OOO Keremet" />
             </a-form-item>
           </a-form>

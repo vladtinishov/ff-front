@@ -14,8 +14,8 @@ onMounted(() => {
 </script>
 
 <template>
-  <div class="w-full">
-    <OrderCard :order="order" :key="order.id" v-for="order in orders" />
+  <div class="w-full mb-5">
+    <OrderCard :order="order" :key="order.id" v-for="order in orders" class="mt-5 first:mt-0" />
   </div>
 </template>
 

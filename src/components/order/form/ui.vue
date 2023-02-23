@@ -1,19 +1,32 @@
 <script lang="ts" setup>
-import { useOrdersStore } from '@/stores'
+import { useOrdersStore, useViewerStore } from '@/stores'
 import { storeToRefs } from 'pinia';
-import { ref, onMounted } from 'vue'
+import { ref, computed } from 'vue'
 import type { ApplicationDto } from '@/shared/api/applications'
 import { ApplicationCard } from '@/components/applications';
 import { FSection } from '@/shared/ui/base';
+import { useRoute } from 'vue-router';
+
+const route = useRoute()
+const id = route.params.id
 
 const orderStore = useOrdersStore()
-orderStore.getOne(1)
+const viewerStore = useViewerStore()
+
+orderStore.getOne(+id)
 
 const { order } = storeToRefs(orderStore)
+const { viewer } = storeToRefs(viewerStore)
 
 const selectedApplication = ref<ApplicationDto>()
 const showModal = ref(false)
 
+const openModal = () => {
+  orderStore.sendOrder({ freelancerId: viewer.value.id!, orderId: order.value.id!, fromCustomer: false })
+  showModal.value = true
+}
+
+const isTaked = computed(() => viewer.value.ordersUsers?.find(ou => ou.orderId === order.value.id)?.isApprovedByFreelancer)
 </script>
 
 <template>
@@ -35,13 +48,28 @@ const showModal = ref(false)
         </div>
       </FSection>
     </div> 
-    <FSection :class="$style.orderButton">
+    <FSection :class="$style.orderButton" v-if="!isTaked">
       <p class="text-gray-500 leading-5">Ожидание может занять от 1-го до 10-ти дней. Если за то время заказчик не принял вашу заявку, она будет автоматически отклонена</p>
-      <a-button type="primary" block size="large">Выполнить заказ</a-button>
+      <a-button type="primary" block size="large" @click="openModal">Выполнить заказ</a-button>
+    </FSection>
+    <FSection :class="$style.orderButton" v-else>
+      <p class="text-gray-500 leading-5">Ожидание может занять от 1-го до 10-ти дней. Если за то время заказчик не принял вашу заявку, она будет автоматически отклонена</p>
+      <router-link :to="{ name: 'order-progress', params: { id: order.id } }">
+        <a-button type="primary" block size="large" @click="openModal">Посмотреть статус</a-button>
+      </router-link>
     </FSection>
   </div>
   <a-modal :footer="null" v-model:visible="showModal" :title="selectedApplication?.specialization!.name">
-    <ApplicationCard :application="selectedApplication!" />
+    <h1 class="text-lg">
+      Ваш отклик отправлен заказчику!
+    </h1>
+    <p class="text-gray-500">Ожидайте его ответ, либо посмотрите другие заказы</p>
+    <router-link :to="{ name: 'home' }">
+      <div class="flex items-center mt-5">
+        <font-awesome-icon icon="fa-solid fa-chevron-left" class="mr-2" />
+        <span>Смотреть другие заказы</span>
+      </div>
+    </router-link>
   </a-modal>
 </template>
 

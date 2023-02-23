@@ -30,6 +30,12 @@ export const messages = {
         password: 'Пароль',
         aboutFreelance: 'Самое крутое о себе',
         aboutCompany: 'Самое крутое о компании',
+        specialization: 'Специальность',
+        expirience: 'Опыт работы',
+        hasExpirience: 'Опыт работы',
+        educationName: 'Учебное заведение',
+        educationGrade: 'Степень',
+        educationSpecialization: 'Специализация',
         passwordPlaceholder: 'ТвойКРУТОЙиСАмЫЙЛУчшийПароль'
       },
       avatarLoader: {

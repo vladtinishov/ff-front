@@ -24,6 +24,11 @@ export const useUsersStore = defineStore('users', {
       },
       async getFreelancer(id: number) {
         this.freelancer = await API.users.getFreelancer(id)
+      },
+      
+      async getFreelancersByOrderId(orderId: number) {
+        const ordersUsers = await API.users.getFreelancersByOrderId(orderId)
+        this.freelancers = ordersUsers.users!
       }
     },
   }

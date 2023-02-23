@@ -1,6 +1,5 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import HomeView from '../views/HomeView.vue'
-import SignupView from '../views/SignupView.vue'
 import LoginView from '../views/LoginView.vue'
 import OrdersView from '../views/OrdersView.vue'
 import OrderView from '../views/OrderView.vue'
@@ -9,6 +8,10 @@ import CustomerSignupView from '../views/CustomerSignupView.vue'
 import FreelanceSignupView from '../views/FreelanceSignupView.vue'
 import UserPageView from '../views/UserPageView.vue'
 import ApplicationView from '../views/ApplicationView.vue'
+import UserSettingsView from '../views/UserSettingsView.vue'
+import OrderPageView from '../views/OrderPageView.vue'
+import OrderProgressView from '../views/OrderProgressView.vue'
+import ClickedOrdersView from '../views/ClickedOrdersView.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -54,10 +57,31 @@ const router = createRouter({
       component: UserPageView
     },
     {
+      path: '/me/order/:id',
+      name: 'order-page',
+      component: OrderPageView
+    },
+    {
       path: '/application/:id',
       name: 'application',
       component: ApplicationView
     },
+    {
+      path: '/user-settings',
+      name: 'user-settings',
+      component: UserSettingsView
+    },
+    {
+      path: '/order-progress/:id',
+      name: 'order-progress',
+      component: OrderProgressView
+    },
+    {
+      path: '/clicked-orders',
+      name: 'clicked-orders',
+      component: ClickedOrdersView
+    },
+    
     
   ]
 })

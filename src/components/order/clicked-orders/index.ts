@@ -1,0 +1,1 @@
+export { default as CustomerClickedOrders } from './ui.vue'

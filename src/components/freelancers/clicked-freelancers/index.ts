@@ -1,0 +1,1 @@
+export { default as ClickedFreelancers } from './ui.vue'

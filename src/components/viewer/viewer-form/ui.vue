@@ -57,9 +57,18 @@ viewerStore.getViewer()
             </div>
           </div>
           <div :class="$style.userInfo">
-            <div>
-              <h1 class="mb-0 text-xl">{{ viewer.name }} {{  viewer.surname }}</h1>
-              <p class="mb-0 text-gray-500">Web-design</p>
+            <div class="flex justify-between w-full">
+              <div>
+                <h1 class="mb-0 text-xl">{{ viewer.name }} {{  viewer.surname }}</h1>
+                <p class="mb-0 text-gray-500">Web-design</p>
+              </div>
+              <div>
+                <router-link :to="{ name: 'user-settings' }">
+                  <a-button title="Посмотреть" shape="circle">
+                    <template #icon><font-awesome-icon icon="fa-solid fa-gear" /></template>
+                  </a-button>
+                </router-link>
+              </div>
             </div>
             <div class="mt-4">
               {{ viewer.about }}

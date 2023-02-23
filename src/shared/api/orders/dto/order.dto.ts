@@ -1,11 +1,15 @@
 import type { UserDto } from "../../users"
+import type { OrderUserDto } from "./order-user.dto"
 
 export interface OrderDto {
-  id: number
+  id?: number
   customerId: number
-  users: UserDto[]
+  users?: UserDto[]
+  ordersUsers?: OrderUserDto[]
   task: string
+  isTaked: boolean
   content: string
   createdAt: string
-  requiredQualityId: number
+  requiredQualityId?: number
+  isClosed: boolean
 }

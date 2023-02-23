@@ -1,0 +1,19 @@
+.container {
+  .order {
+    transition: .3 all;
+    background: white;
+    border-radius: 10px;
+    border: 1px solid #e5e5e5;
+    padding: 20px;
+    cursor: pointer;
+    margin-top: 10px;
+
+    &:first-child {
+      margin-top: 0;
+    }
+  }
+
+  .isActive {
+    border: 3px solid  #7a2cba;
+  }
+}

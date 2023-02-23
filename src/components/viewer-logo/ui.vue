@@ -1,61 +1,50 @@
 <script lang="ts" setup>
-import { h } from 'vue'
-import { NIcon } from 'naive-ui'
-import type { Component } from 'vue'
-import {
-  PersonCircleOutline as UserIcon,
-  Pencil as EditIcon,
-  LogOutOutline as LogoutIcon
-} from '@vicons/ionicons5'
+import { computed } from 'vue'
 import { useViewerStore } from '@/stores/viewer.store'
 import { storeToRefs } from 'pinia'
 
 const viewerStore = useViewerStore()
+const { viewer } = storeToRefs(viewerStore)
 
-const renderIcon = (icon: Component) => {
-  return () => {
-    return h(NIcon, null, {
-      default: () => h(icon)
-    })
-  }
-}
+const viewerName = computed(() => {
+	if (viewer.value.role === 1) return viewer.value.name
+	return viewer.value.companyName
+})
 
-const options = [
-	// {
-	// 	label: local.value.viewer.preferences,
-	// 	key: 'profile',
-	// 	icon: renderIcon(UserIcon)
-	// },
-	// {
-	// 	label: local.value.viewer.applications,
-	// 	key: 'editProfile',
-	// 	icon: renderIcon(EditIcon)
-	// },
-	// {
-	// 	label: local.value.viewer.exit,
-	// 	key: 'logout',
-	// 	icon: renderIcon(LogoutIcon)
-	// }
-]
+const roleName = computed(() => {
+	if (viewer.value.role === 1) return 'Фрилансер'
+	return 'Заказчик'
+})
 
 </script>
 
 <template>
-	<n-dropdown :options="options" trigger="click">
+	<a-dropdown>
     <div :class="$style.viewerContainer">
-		<!-- <div :class="$style.viewerInfo">
-			<n-ellipsis :class="$style.name">
-				Константин
-			</n-ellipsis>
-			<div :class="$style.specialist" class="text-gray-300">Фрилансер</div>
+			<div :class="$style.viewerInfo">
+				{{ viewerName }}
+				<div :class="$style.specialist" class="text-gray-300">{{ roleName }}</div>
+			</div>
+			<a-avatar
+				round
+				size="small"
+				src="https://07akioni.oss-cn-beijing.aliyuncs.com/07akioni.jpeg"
+			/>
 		</div>
-		<n-avatar
-			round
-			size="small"
-			src="https://07akioni.oss-cn-beijing.aliyuncs.com/07akioni.jpeg"
-		/> -->
-		</div>
-  </n-dropdown>
+    <template #overlay>
+      <a-menu>
+        <a-menu-item>
+          <router-link :to="{ name: 'me' }">Мой профиль</router-link>
+        </a-menu-item>
+        <a-menu-item>
+          <router-link :to="{ name: 'user-settings' }">Настройки</router-link>
+        </a-menu-item>
+        <a-menu-item>
+          <router-link :to="{ name: 'clicked-orders' }">Мои заказы</router-link>
+        </a-menu-item>
+      </a-menu>
+    </template>
+  </a-dropdown>
 </template>
 
 <style lang="scss" module>

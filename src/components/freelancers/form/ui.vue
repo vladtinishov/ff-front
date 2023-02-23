@@ -1,17 +1,24 @@
 <script lang="ts" setup>
-import { useUsersStore } from '@/stores'
+import { useOrdersStore, useUsersStore } from '@/stores'
 import { storeToRefs } from 'pinia';
 import { computed, ref } from 'vue'
 import type { ApplicationDto } from '@/shared/api/applications'
 import { ApplicationCard } from '@/components/applications';
+import { OrderingForm } from '@/components/order'
+import { useRoute } from 'vue-router';
 
 const usersStore = useUsersStore()
+const ordersStore = useOrdersStore()
+const route = useRoute()
 
+const id = route.params.id
 const { freelancer } = storeToRefs(usersStore)
 
 const applications = computed(() => freelancer.value.applications)
 const selectedApplication = ref<ApplicationDto>()
-const showModal = ref(false)
+const canShowApplicationModal = ref(false)
+const canShowOrderModal = ref(false)
+const selectedOrderId = ref<number>()
 
 const likes = computed(() => {
   let likes = 0
@@ -26,12 +33,25 @@ const closedTasksCount = computed(() => {
 })
 
 const openApplication = (id: number) => {
-  console.log(id)
   selectedApplication.value = applications.value?.find((application) => application.id === id)
-  showModal.value = true
+  canShowApplicationModal.value = true
 }
 
-usersStore.getFreelancer(1)
+const openOrdering = () => {
+  canShowOrderModal.value = true
+}
+
+const selectedOrder = (id: number) => {
+  selectedOrderId.value = id
+}
+
+const onSendOrder = () => {
+  console.log(selectedOrderId.value)
+  canShowOrderModal.value = false
+  ordersStore.sendOrder({ orderId: selectedOrderId.value!, freelancerId: freelancer.value.id!, fromCustomer: true })
+}
+
+usersStore.getFreelancer(+id!)
 </script>
 
 <template>
@@ -67,7 +87,6 @@ usersStore.getFreelancer(1)
           <div :class="$style.userInfo">
             <div>
               <h1 class="mb-0 text-xl">{{ freelancer.name }} {{  freelancer.surname }}</h1>
-              <p class="mb-0 text-gray-500">Web-design</p>
             </div>
             <div class="mt-4">
               {{ freelancer.about }}
@@ -75,7 +94,7 @@ usersStore.getFreelancer(1)
             <div class="mt-3">
               <h1>Достижения</h1>
               <div>
-                <a-tag color="green" v-for="achievement in freelancer.achievements">
+                <!-- <a-tag color="green" v-for="achievement in freelancer.achievements">
                   <a-tooltip placement="bottom">
                     <template #title>
                       <h1 class="text-white">{{ achievement.name }}</h1>
@@ -83,7 +102,7 @@ usersStore.getFreelancer(1)
                     </template>
                     <span class="p-2">{{ achievement.name }}</span>
                   </a-tooltip>
-                </a-tag>
+                </a-tag> -->
               </div>
             </div>
           </div>
@@ -97,14 +116,14 @@ usersStore.getFreelancer(1)
               <a-list-item>
                 <div class="cursor-pointer flex items-center">
                   <h1 class="text-blue-500" @click="openApplication(item.id)">{{ item.specialization.name }}</h1>
-                  <a-tooltip placement="bottom" v-if="item.isFavorite">
+                  <!-- <a-tooltip placement="bottom" v-if="item.isFavorite">
                     <template #title>
                       Избранное резюме
                     </template>
                     <div>
                       <font-awesome-icon icon="fa-solid fa-star" class="text-yellow-500 mb-1 ml-2" />
                     </div>
-                  </a-tooltip>
+                  </a-tooltip> -->
                 </div>
                 <a-button title="Посмотреть" @click="openApplication(item.id)">
                   <template #icon><font-awesome-icon icon="fa-solid fa-eye" /></template>
@@ -118,11 +137,21 @@ usersStore.getFreelancer(1)
     </div>
     <div :class="[$style.section, $style.orderButton]">
       <p class="text-gray-500 leading-5">Ожидание может занять от 1-го до 10-ти дней. Если за то время фрилансер не возьмётся за заказ, ваш заказ будет удалён</p>
-      <a-button type="primary" block size="large">Заказать услугу</a-button>
+      <a-button type="primary" block size="large" @click="openOrdering">Заказать услугу</a-button>
     </div>
   </div>
-  <a-modal :footer="null" v-model:visible="showModal" :title="selectedApplication?.specialization!.name">
+  <a-modal :footer="null" v-model:visible="canShowApplicationModal" :title="selectedApplication?.specialization!.name">
     <ApplicationCard :application="selectedApplication!" />  
+  </a-modal>
+  <a-modal 
+    v-model:visible="canShowOrderModal" 
+    title="Выберите заказ" 
+    :okButtonProps="{ disabled: !selectedOrderId }" 
+    cancelText="Отмена" 
+    okText="Заказать"
+    :onOk="onSendOrder"
+  >
+    <OrderingForm @onSelect="selectedOrder" />  
   </a-modal>
 </template>
 

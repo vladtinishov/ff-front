@@ -10,7 +10,7 @@ const route = useRoute()
 const isNew = route.params.id === 'new'
 if (isNew) {
   appStore.setPageTitle('Добавление резюме')
-} appStore.setPageTitle('Редактирование резюме')
+} else appStore.setPageTitle('Редактирование резюме')
 </script>
 
 <template>
