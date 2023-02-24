@@ -32,7 +32,7 @@ const onSubmit = async (data: LoginData) => {
 		</a-form-item>
 		<a-form-item name="password" :rules="[{ required: true, message: $t('errors.emptyField') }]">
 			<span>{{ $t('viewer.password') }}</span>
-			<a-input v-model:value="formValue.password" :placeholder="$t('viewer.passwordPlaceholder')" />
+			<a-input v-model:value="formValue.password" type="password" :placeholder="$t('viewer.passwordPlaceholder')" />
 		</a-form-item>
 
 		<a-form-item>
