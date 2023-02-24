@@ -186,15 +186,15 @@ const onDelete = async () => {
           <a-form :label-width="80" :model="application">
             <a-form-item name="name" :rules="[{ required: true, message: $t('errors.emptyField') }]">
               <span>{{ $t('application.educationName') }}</span>
-              <a-input v-model:value="application.education.name" placeholder="OOO Keremet" />
+              <a-input v-model:value="application.education.name" placeholder="" />
             </a-form-item>
             <a-form-item name="education.educationGrade" :rules="[{ required: true, message: $t('errors.emptyField') }]">
               <span>{{ $t('application.name') }}</span>
-              <a-input v-model:value="application.education.grade" placeholder="OOO Keremet" />
+              <a-input v-model:value="application.education.grade" placeholder="" />
             </a-form-item>
             <a-form-item name="education.specialization" :rules="[{ required: true, message: $t('errors.emptyField') }]">
               <span>{{ $t('application.educationSpecialization') }}</span>
-              <a-input v-model:value="application.education.specialization" placeholder="OOO Keremet" />
+              <a-input v-model:value="application.education.specialization" placeholder="" />
             </a-form-item>
           </a-form>
         </div>
