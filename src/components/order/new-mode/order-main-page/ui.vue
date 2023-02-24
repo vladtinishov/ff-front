@@ -37,7 +37,7 @@ const viewerName = computed(() => {
       </div>
       <div :class="$style.textContainer">
         <div :class="$style.text">
-          <h1 class="text-5xl font-bold text-white">Быстрый заказ под ваши критерии</h1>
+          <h1 class="text-5xl font-bold text-white mt-6">Быстрый заказ под ваши критерии</h1>
           <p class="text-3xl">
             Вы указываете, кто вам нужен и указываете цену, а система сама подберёт вам фрилансера.
           </p>
