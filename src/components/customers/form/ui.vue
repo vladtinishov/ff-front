@@ -7,6 +7,7 @@ import { ApplicationCard } from '@/components/applications';
 import { ApplicationsSection } from '@/components/applications/section';
 import { FSection } from '@/shared/ui/base';
 import { OrdersSection } from '@/components/order';
+import { UserOutlined } from '@ant-design/icons-vue';
 
 const viewerStore = useViewerStore()
 
@@ -34,7 +35,9 @@ viewerStore.getViewer()
         <div :class="$style.userMeta">
           <div class="flex flex-col">
             <div style="width: 150px" class="flex justify-center">
-              <a-avatar :size="{ xs: 130, sm: 130, md: 130, lg: 130, xl: 130, xxl: 130 }"></a-avatar>
+              <a-avatar style="background-color: #f56a00" :size="{ xs: 130, sm: 130, md: 130, lg: 130, xl: 130, xxl: 130 }">
+                <template #icon><UserOutlined /></template>
+              </a-avatar>
             </div>
           </div>
           <div :class="$style.userInfo">

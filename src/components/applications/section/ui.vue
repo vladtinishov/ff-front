@@ -28,12 +28,11 @@ const openApplication = (id: number) => {
   <div :class="$style.container">
     <div :class="$style.section">
       <div>
-        <h1 class="text-xl">Резюме</h1>
         <a-list :data-source="applications">
           <template #renderItem="{ item }">
             <a-list-item>
               <div class="cursor-pointer flex items-center">
-                <h1 class="text-blue-500" @click="openApplication(item.id)">{{ item.specialization.name }}</h1>
+                <h1 class="text-blue-500" @click="openApplication(item.id)">{{ item.specialization?.name }}</h1>
                 <a-tooltip placement="bottom" v-if="item.isFavorite">
                   <template #title>
                     Избранное резюме

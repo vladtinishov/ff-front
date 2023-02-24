@@ -32,6 +32,8 @@ export const useViewerStore = defineStore('viewer', {
 
           setCookie(ACCESS_TOKEN, res.accessToken)
 
+          this.getViewer()
+
           return true
         }
         catch {
@@ -48,6 +50,8 @@ export const useViewerStore = defineStore('viewer', {
         if (!res?.accessToken) return false
 
         setCookie(ACCESS_TOKEN, res.accessToken)
+
+        this.getViewer()
 
         return true
       },
@@ -80,6 +84,10 @@ export const useViewerStore = defineStore('viewer', {
       async getAvatar(userId: number, orderId: number) {
         await API.files.getFiles({ orderId, userId })
       },
+
+      async setNewMode() {
+        await API.auth.setNewMode()
+      }
     },
   }
 )

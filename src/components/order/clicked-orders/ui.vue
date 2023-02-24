@@ -33,7 +33,7 @@ viewerStore.getViewer()
 </script>
 
 <template>
-  <a-list item-layout="horizontal" :data-source="orders">
+  <a-list item-layout="horizontal" :data-source="orders" class="w-full">
     <template #renderItem="{ item }">
       <a-list-item>
         <FSection class="w-full">

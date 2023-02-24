@@ -7,6 +7,8 @@ export interface OrderDto {
   users?: UserDto[]
   ordersUsers?: OrderUserDto[]
   task: string
+  price?: number
+  specializationId?: number
   isTaked: boolean
   content: string
   createdAt: string

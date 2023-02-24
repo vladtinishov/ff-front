@@ -12,16 +12,25 @@ const viewerStore = useViewerStore()
 const { viewer } = storeToRefs(viewerStore)
 
 const likes = computed(() => {
-  let likes = 0
-
-  viewer.value.ordersUsers?.forEach((userOrder) => likes += userOrder.likes)
-
-  return likes / viewer.value.ordersUsers?.length!
+  return Math.floor((Math.random() * 5) + 1)
 })
 
 const closedTasksCount = computed(() => {
-  return viewer.value.ordersUsers?.filter(userOrder => userOrder.isClosed).length
+  return Math.floor((Math.random() * 15) + 1)
 })
+
+const achievements = [
+  {
+    name: 'Быстрее всех',
+    description: 'Фрилансер сделал более 10 заказов с оценкой не ниже 4'
+  },
+  {
+    name: 'Дружелюбный',
+    description: 'Более 15 заказчиков оценили приятное общение с фрилансером'
+  },
+]
+
+const canShowApplication = computed(() => !!viewer.value.applications?.length)
 
 viewerStore.getViewer()
 </script>
@@ -33,7 +42,9 @@ viewerStore.getViewer()
         <div :class="$style.userMeta">
           <div class="flex flex-col">
             <div style="width: 150px" class="flex justify-center">
-              <a-avatar :size="{ xs: 130, sm: 130, md: 130, lg: 130, xl: 130, xxl: 130 }"></a-avatar>
+              <a-avatar :size="{ xs: 130, sm: 130, md: 130, lg: 130, xl: 130, xxl: 130 }" style="background-color: #1890ff">
+                {{ viewer?.name[0] }}
+              </a-avatar>
             </div>
             <div class="flex justify-between px-5 mt-5" style="width: 150px">
               <a-tooltip placement="bottom">
@@ -60,7 +71,6 @@ viewerStore.getViewer()
             <div class="flex justify-between w-full">
               <div>
                 <h1 class="mb-0 text-xl">{{ viewer.name }} {{  viewer.surname }}</h1>
-                <p class="mb-0 text-gray-500">Web-design</p>
               </div>
               <div>
                 <router-link :to="{ name: 'user-settings' }">
@@ -76,11 +86,11 @@ viewerStore.getViewer()
             <div class="mt-3">
               <h1>Достижения</h1>
               <div>
-                <a-tag color="green" style="margin: 5px 0; margin-right: 5px" v-for="achievement in viewer.achievements">
+                <a-tag color="green" style="margin: 5px 0; margin-right: 5px" v-for="achievement in achievements">
                   <a-tooltip placement="bottom">
                     <template #title>
                       <h1 class="text-white">{{ achievement.name }}</h1>
-                      <p>Достижение даётся когда фрилансер выполняет 15 заказов подряд со средней оценкой 4 балла</p>
+                      <p>{{ achievement.description }}</p>
                     </template>
                     <span class="p-2">{{ achievement.name }}</span>
                   </a-tooltip>
@@ -91,7 +101,9 @@ viewerStore.getViewer()
         </div>
       </div>
       <FSection class="mt-5">
-        <ApplicationsSection :applications="viewer.applications!" :showEdit="true" />
+        <h1 class="text-2xl">Резюме</h1>
+        <ApplicationsSection :applications="viewer.applications!" :showEdit="true" v-if="canShowApplication" />
+        <h1 v-else>У вас нет созданных резюме</h1>
       </FSection>
     </div>
     <div :class="[$style.section, $style.orderButton]">

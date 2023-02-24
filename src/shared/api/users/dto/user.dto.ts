@@ -15,6 +15,7 @@ export interface UserDto {
   role: number
   likes: number
   achievements?: AchievementsDto[]
+  isNewMode: boolean
   orders?: OrderDto[]
   ordersUsers?: OrderUserDto[]
   applications?: ApplicationDto[]

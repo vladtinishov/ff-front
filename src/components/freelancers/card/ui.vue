@@ -8,15 +8,11 @@ interface Props {
 const props = defineProps<Props>()
 
 const likes = computed(() => {
-  let likes = 0
-
-  props.freelancer.ordersUsers?.forEach((userOrder) => likes += userOrder.likes)
-
-  return likes / props.freelancer.ordersUsers?.length!
+  return Math.floor((Math.random() * 5) + 1)
 })
 
 const closedTasksCount = computed(() => {
-  return props.freelancer.ordersUsers?.filter(userOrder => userOrder.isClosed).length
+  return Math.floor((Math.random() * 15) + 1)
 })
 
 </script>
@@ -47,18 +43,19 @@ const closedTasksCount = computed(() => {
           Перейти на страницу
         </template>
         <div>
-          <font-awesome-icon icon="fa-solid fa-chevron-right" />
+          <RouterLink :to="{ name: 'freelancer-page', params: { id: freelancer.id } }">
+            <font-awesome-icon icon="fa-solid fa-chevron-right" />
+          </RouterLink>
         </div>
       </a-tooltip>
     </template>
     <div class="flex items-center pb-0">
-      <a-avatar src="https://joeschmoe.io/api/v1/random" />
+      <a-avatar>{{ freelancer.name[0] }}</a-avatar>
       <div class="ml-2">
         <h1 class="mb-0"><RouterLink :to="{ name: 'freelancer-page', params: { id: freelancer.id } }">{{ freelancer.name }} {{ freelancer.surname }}</RouterLink></h1>
-        <p class="mb-0 text-gray-500">Web-design</p>
       </div>
     </div>
-    <div class="mt-3">
+    <div class="mt-3 line-clamp-3" style="height: 60px">
       {{ freelancer.about }}
     </div>
     <div class="mt-3">
@@ -66,10 +63,10 @@ const closedTasksCount = computed(() => {
       <a-tag color="green">
         <a-tooltip placement="bottom">
           <template #title>
-            <h1 class="text-white">Хороший парень</h1>
-            <p>Достижение даётся когда фрилансер выполняет 15 заказов подряд со средней оценкой 4 балла</p>
+            <h1 class="text-white">Дружелюбный</h1>
+            <p>Более 15 заказчиков оценили приятное общение с фрилансером</p>
           </template>
-          <span class="p-2">Хороший парень</span>
+          <span class="p-2">Дружелюбный</span>
         </a-tooltip>
       </a-tag>
     </div>

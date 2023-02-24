@@ -102,12 +102,14 @@
 
 @media (max-width: 1100px) {
   .container {
-    .banner {
-      display: none;
-    }
-
-    .form {
-      padding: 0 20px;
+    .signupContainer, .loginContainer {
+      .banner {
+        display: none;
+      }
+  
+      .form {
+        padding: 0 20px;
+      }
     }
   }
 }

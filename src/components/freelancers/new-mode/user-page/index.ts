@@ -1,0 +1,1 @@
+export { default as FreelancerUserPage } from './ui.vue'

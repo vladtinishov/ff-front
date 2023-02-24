@@ -1,0 +1,1 @@
+export { default as NewModeLayout } from './ui.vue'

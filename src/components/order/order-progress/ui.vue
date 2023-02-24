@@ -84,7 +84,7 @@ getData()
         <div :class="$style.placeholder" v-if="!file">
           <h1 class="text-lg">Фрилансер ещё не сдал заказ</h1>
           <div>
-            <font-awesome-icon class="text-8xl mt-5" icon="fa-solid fa-file-excel" />
+            <font-awesome-icon class="text-8xl mt-5" icon="fa-solid fa-inbox" />
           </div>
         </div>
         <div :class="$style.placeholder" v-else>

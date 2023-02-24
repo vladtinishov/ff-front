@@ -6,6 +6,7 @@ import type { ApplicationDto } from '@/shared/api/applications'
 import { ApplicationCard } from '@/components/applications';
 import { OrderingForm } from '@/components/order'
 import { useRoute } from 'vue-router';
+import { UserOutlined } from '@ant-design/icons-vue';
 
 const usersStore = useUsersStore()
 const ordersStore = useOrdersStore()
@@ -21,16 +22,23 @@ const canShowOrderModal = ref(false)
 const selectedOrderId = ref<number>()
 
 const likes = computed(() => {
-  let likes = 0
-
-  freelancer.value.ordersUsers?.forEach((userOrder) => likes += userOrder.likes)
-
-  return likes / freelancer.value.ordersUsers?.length!
+  return Math.floor((Math.random() * 5) + 1)
 })
 
 const closedTasksCount = computed(() => {
-  return freelancer.value.ordersUsers?.filter(userOrder => userOrder.isClosed).length
+  return Math.floor((Math.random() * 15) + 1)
 })
+
+const achievements = [
+  {
+    name: 'Быстрее всех',
+    description: 'Фрилансер сделал более 10 заказов с оценкой не ниже 4'
+  },
+  {
+    name: 'Дружелюбный',
+    description: 'Более 15 заказчиков оценили приятное общение с фрилансером'
+  },
+]
 
 const openApplication = (id: number) => {
   selectedApplication.value = applications.value?.find((application) => application.id === id)
@@ -61,7 +69,9 @@ usersStore.getFreelancer(+id!)
         <div :class="$style.userMeta">
           <div class="flex flex-col">
             <div style="width: 150px" class="flex justify-center">
-              <a-avatar :size="{ xs: 130, sm: 130, md: 130, lg: 130, xl: 130, xxl: 130 }"></a-avatar>
+              <a-avatar :size="{ xs: 130, sm: 130, md: 130, lg: 130, xl: 130, xxl: 130 }">
+                <template #icon><UserOutlined /></template>
+              </a-avatar>
             </div>
             <div class="flex justify-between px-5 mt-5" style="width: 150px">
               <a-tooltip placement="bottom">
@@ -94,15 +104,15 @@ usersStore.getFreelancer(+id!)
             <div class="mt-3">
               <h1>Достижения</h1>
               <div>
-                <!-- <a-tag color="green" v-for="achievement in freelancer.achievements">
+                <a-tag color="green" v-for="achievement in achievements">
                   <a-tooltip placement="bottom">
                     <template #title>
                       <h1 class="text-white">{{ achievement.name }}</h1>
-                      <p>Достижение даётся когда фрилансер выполняет 15 заказов подряд со средней оценкой 4 балла</p>
+                      <p>{{ achievement.description }}</p>
                     </template>
                     <span class="p-2">{{ achievement.name }}</span>
                   </a-tooltip>
-                </a-tag> -->
+                </a-tag>
               </div>
             </div>
           </div>
@@ -151,7 +161,7 @@ usersStore.getFreelancer(+id!)
     okText="Заказать"
     :onOk="onSendOrder"
   >
-    <OrderingForm @onSelect="selectedOrder" />  
+    <OrderingForm :freelancer-id="1" @onSelect="selectedOrder" />  
   </a-modal>
 </template>
 

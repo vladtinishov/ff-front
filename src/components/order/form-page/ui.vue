@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-import { useOrdersStore, useViewerStore } from '@/stores'
+import { useAppStore, useOrdersStore, useViewerStore } from '@/stores'
 import { storeToRefs } from 'pinia';
 import { ref, onMounted } from 'vue'
 import { FSection } from '@/shared/ui/base'
@@ -15,7 +15,9 @@ const props = withDefaults(defineProps<Props>(), { isCreate: false })
 
 const ordersStore = useOrdersStore()
 const viewerStore = useViewerStore()
+const appStore = useAppStore()
 
+const { specializations } = storeToRefs(appStore)
 const { order, isDeleteLoading } = storeToRefs(ordersStore)
 const editor = ref()
 
@@ -65,12 +67,16 @@ onMounted(async () => {
       <FSection>
         <div  :class="$style.sectionInner">
           <a-form :label-width="80" :model="order">
-            <a-form-item name="name" :rules="[{ required: true, message: $t('errors.emptyField') }]">
-              <span>{{ $t('application.name') }}</span>
+            <a-form-item name="task" :rules="[{ required: true, message: $t('errors.emptyField') }]">
+              <span>{{ $t('order.title') }}</span>
               <a-input v-model:value="order.task" placeholder="OOO Keremet" />
             </a-form-item>
-            <a-form-item name="education.grade" :rules="[{ required: true, message: $t('errors.emptyField') }]">
-              <span>{{ $t('application.name') }}</span>
+            <a-form-item name="specializationId" :rules="[{ required: true, message: $t('errors.emptyField') }]">
+              <span>{{ $t('order.specialization') }}</span>
+              <a-select v-model:value="order.specializationId" :options="specializations"></a-select>
+            </a-form-item>
+            <a-form-item name="content" :rules="[{ required: true, message: $t('errors.emptyField') }]">
+              <span>{{ $t('order.task') }}</span>
               <QuillEditor ref="editor" theme="snow" style="height: 500px" @update:content="onTextChange" />
             </a-form-item>
           </a-form>

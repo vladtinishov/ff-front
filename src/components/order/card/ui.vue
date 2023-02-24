@@ -28,7 +28,7 @@ const showModal = () => {
         </p>
       </div>
       <div class="flex items-center">
-        <a-avatar src="https://joeschmoe.io/api/v1/random" />
+        <a-avatar>{{ order?.users?.[0]?.companyName[0] }}</a-avatar>
         <h1 class="m-0 ml-2">{{ order?.users?.[0]?.companyName }}</h1>
       </div>
       <div class="line-clamp-3">

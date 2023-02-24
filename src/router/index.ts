@@ -12,6 +12,7 @@ import UserSettingsView from '../views/UserSettingsView.vue'
 import OrderPageView from '../views/OrderPageView.vue'
 import OrderProgressView from '../views/OrderProgressView.vue'
 import ClickedOrdersView from '../views/ClickedOrdersView.vue'
+import NewModeOrdersPageView from '../views/NewModeOrdersPageView.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -80,6 +81,11 @@ const router = createRouter({
       path: '/clicked-orders',
       name: 'clicked-orders',
       component: ClickedOrdersView
+    },
+    {
+      path: '/new-mode-order',
+      name: 'new-mode-order',
+      component: NewModeOrdersPageView
     },
     
     

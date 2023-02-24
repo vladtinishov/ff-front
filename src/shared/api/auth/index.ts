@@ -11,6 +11,7 @@ export const auth = {
   login: (dto: AuthViewerDto) => api.post('/login', dto).then(d => d.data),
   get: (accessToken: string) => api.get('/authorized', { params: { accessToken }}).then(d => d.data),
   edit: (dto: UserDto) => api.patch('/', dto).then(d => d.data),
+  setNewMode: () => api.patch('/set-new-mode').then(d => d.data),
 }
 
 export * from './dto'

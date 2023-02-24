@@ -40,7 +40,7 @@ const isTaked = computed(() => viewer.value.ordersUsers?.find(ou => ou.orderId =
           </p>
         </div>
         <div class="flex items-center">
-          <a-avatar src="https://joeschmoe.io/api/v1/random" />
+          <a-avatar>{{ order.users?.[0]?.companyName[0] }}</a-avatar>
           <h1 class="m-0 ml-2">{{ order.users?.[0]?.companyName }}</h1>
         </div>
         <div>
@@ -48,9 +48,13 @@ const isTaked = computed(() => viewer.value.ordersUsers?.find(ou => ou.orderId =
         </div>
       </FSection>
     </div> 
-    <FSection :class="$style.orderButton" v-if="!isTaked">
+    <FSection :class="$style.orderButton" v-if="!isTaked && viewer.role === 1">
       <p class="text-gray-500 leading-5">Ожидание может занять от 1-го до 10-ти дней. Если за то время заказчик не принял вашу заявку, она будет автоматически отклонена</p>
       <a-button type="primary" block size="large" @click="openModal">Выполнить заказ</a-button>
+    </FSection>
+    <FSection :class="$style.orderButton" v-else-if="viewer.role === 2">
+      <p class="text-gray-500 leading-5">Вы не можете выполнить заказ, так как являетесь Заказчиком. Войдите как Фрилансер, чтобы отправить отклик</p>
+      <a-button type="primary" block size="large" disabled>Выполнить заказ</a-button>
     </FSection>
     <FSection :class="$style.orderButton" v-else>
       <p class="text-gray-500 leading-5">Ожидание может занять от 1-го до 10-ти дней. Если за то время заказчик не принял вашу заявку, она будет автоматически отклонена</p>

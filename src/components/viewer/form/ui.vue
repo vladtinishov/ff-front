@@ -41,11 +41,7 @@ const onSubmit = async (data: UserDto) => {
 </script>
 
 <template>
-	<a-form :label-width="80" :model="formValue" @finish="onSubmit">
-		<div>
-			<span>{{ $t("viewer.avatar") }}</span>
-			<ImageLoader class="mt-2" />
-		</div>
+	<a-form :label-width="80" :model="formValue" @finish="onSubmit" class="w-full">
 		<div class="flex mt-5" v-if="role === 1">
 			<a-form-item name="name" :rules="[{ required: true, message: $t('errors.emptyField') }]">
 				<span>{{ $t('viewer.name') }}</span>
@@ -69,7 +65,7 @@ const onSubmit = async (data: UserDto) => {
 		</a-form-item>
 		<a-form-item name="password" :rules="[{ required: true, message: $t('errors.emptyField') }]">
 			<span>{{ $t('viewer.password') }}</span>
-			<a-input v-model:value="formValue.password" :placeholder="$t('viewer.passwordPlaceholder')" />
+			<a-input type="password" v-model:value="formValue.password" :placeholder="$t('viewer.passwordPlaceholder')" />
 		</a-form-item>
 		<a-form-item name="lang" :rules="[{ required: true, message: $t('errors.emptyField') }]">
 			<span>{{ $t('viewer.lang') }}</span>

@@ -1,0 +1,1 @@
+export { default as NewModeModal } from './ui.vue'

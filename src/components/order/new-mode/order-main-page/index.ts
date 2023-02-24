@@ -1,0 +1,1 @@
+export { default as NewModeOrderMainPage} from './ui.vue'

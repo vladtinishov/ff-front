@@ -1,0 +1,59 @@
+.container {
+  width: 100%;
+  header {
+    padding: 10px 0;
+    
+    box-shadow: -1px -3px 9px 0px black;
+
+    .headerContainer {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+
+      .viewerContainer {
+        width: 190px;
+        cursor: pointer;
+        padding: 8px 20px;
+        border-radius: 30px;
+        display: flex;
+        align-items: center;
+        border: 2px solid black;
+      
+        .viewerInfo {
+          margin-left: 15px;
+          .name {
+            max-width: 80px;
+          }
+      
+          .specialist {
+            margin-top: -4px;
+          }	
+        }
+      }
+    }
+
+    .contentColumn {
+      .likes {
+        display: flex;
+  
+        .like {
+          width: 20px;
+          height: 20px;
+          border-radius: 50%;
+          border: 2px solid black;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+        }
+      }
+    }
+    
+  }
+
+  .contentColumn {
+    width: 100%;
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 0 10px;
+  }
+}

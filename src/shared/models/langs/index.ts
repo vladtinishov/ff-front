@@ -7,22 +7,22 @@ export const LANGS = [
 export const SPECIALIZATIONS = [
   {
     "value": 1,
-    "label": "designer"
+    "label": "Дизайнер"
   },
   {
     "value": 2,
-    "label": "font"
+    "label": "Web-Дизайнер"
   },
   {
     "value": 3,
-    "label": "back"
+    "label": "BackEnd Разработчик"
   },
   {
     "value": 4,
-    "label": "smm"
+    "label": "SMM Специалист"
   },
   {
     "value": 5,
-    "label": "gamedev"
+    "label": "Разработчик игр"
   }
 ]

@@ -46,6 +46,11 @@ export const messages = {
         cancel: 'Отмена',
         confirm: 'Применить'
       },
+      order: {
+        title: 'Заголовок',
+        specialization: 'Специализация',
+        task: 'Задача',
+      },
       shared: {
         save: 'Сохранить',
         toNext: 'Дальше',
