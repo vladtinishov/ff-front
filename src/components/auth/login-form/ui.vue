@@ -50,7 +50,7 @@ function handleValidateClick(e: MouseEvent) {
       </a-form-item>
       <a-form-item>
         <span>{{  $t('viewer.password')  }}</span>
-        <a-input v-model:value="formValue.password" placeholder="" />
+        <a-input type="password" v-model:value="formValue.password" placeholder="" />
       </a-form-item>
       
     </div>

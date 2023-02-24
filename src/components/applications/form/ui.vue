@@ -104,7 +104,7 @@ const onDelete = async () => {
             </div>
             <a-form-item name="phone" :rules="[{ required: true, message: $t('errors.emptyField') }]">
               <span>{{ $t('application.phone') }}</span>
-              <a-input v-model:value="application.phone" placeholder="ivan.ivanych" />
+              <a-input v-model:value="application.phone" placeholder="+77775554444" />
             </a-form-item>
             <a-form-item name="email" :rules="[{ required: true, message: $t('errors.emptyField') }]">
               <span>{{ $t('application.email') }}</span>
@@ -119,7 +119,7 @@ const onDelete = async () => {
                 </template>
               </a-select>
             </a-form-item>
-            <a-form-item name="skills" :rules="[{ required: true, message: $t('errors.emptyField') }]">
+            <a-form-item name="skills">
               <span>{{ $t('application.skills') }}</span>
               <a-input-search v-model:value="skill" :placeholder="$t('application.skills')" enter-button="Добавить"
                 @search="addSkill" />
@@ -222,11 +222,11 @@ const onDelete = async () => {
   <a-modal v-model:visible="canShowModal" :title="taskId ? 'Редактирование кейса' : 'Добавление кейса'" @ok="handleOk">
     <a-form :label-width="80" :model="task">
       <a-form-item name="authorName" :rules="[{ required: true, message: $t('errors.emptyField') }]">
-        <span>{{ $t('application.name') }}</span>
+        <span>От кого</span>
         <a-input v-model:value="task!.authorName" placeholder="OOO Keremet" />
       </a-form-item>
       <a-form-item name="task" :rules="[{ required: true, message: $t('errors.emptyField') }]">
-        <span>{{ $t('application.langs') }}</span>
+        <span>Задача</span>
         <a-textarea v-model:value="task!.task" placeholder="Очень интересный случай"
           :auto-size="{ minRows: 2, maxRows: 5 }" />
       </a-form-item>

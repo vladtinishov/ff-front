@@ -149,7 +149,7 @@ onMounted(async () => {
           <p class="ant-upload-text">Кликните или перетащите файл</p>
         </a-upload-dragger>
       </FSection>
-      <FSection class="mt-5" v-if="canShowResult">
+      <FSection class="my-5" v-if="canShowResult">
         <a-result status="success" title="Поздравляем!"
           sub-title="Заказчик принял ваш заказ и остался доволен результатом">
           <template #extra>

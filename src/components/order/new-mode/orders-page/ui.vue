@@ -231,6 +231,7 @@ const showStars = () => {
           </div>
         </div>
       </FSection>
+      <div class="mt-5"></div>
     </div>
   </div>
   <a-modal :width="1000" :footer="null" :closable="false" v-model:visible="canShowModal">
