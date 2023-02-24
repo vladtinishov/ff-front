@@ -26,8 +26,6 @@ const { application, isDeleteLoading } = storeToRefs(applicationStore)
 
 const { langs, specializations } = storeToRefs(appStore)
 
-application.value.specialization!.id = specializations.value[0].value
-
 const skill = ref<string>()
 const canShowModal = ref<boolean>()
 const taskId = ref<number | boolean>()

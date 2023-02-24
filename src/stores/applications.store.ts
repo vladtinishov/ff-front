@@ -4,6 +4,8 @@ import * as API from '@/shared/api'
 import type { OrderDto } from '@/shared/api/orders'
 import type { ApplicationDto } from '@/shared/api/applications'
 import { useViewerStore } from './viewer.store'
+import { useAppStore } from './app.store'
+import { SPECIALIZATIONS } from '@/shared/models'
 
 export const useApplicationsStore = defineStore('application', {
     state: () => {
@@ -24,6 +26,7 @@ export const useApplicationsStore = defineStore('application', {
         this.application = await API.applications.getOne(id)
       },
       initForCreation() {
+        const appStore = useAppStore()
         this.application = {
           name: '',
           surname: '',
@@ -40,7 +43,7 @@ export const useApplicationsStore = defineStore('application', {
           langs: [],
           phone: '',
           skills: [],
-          specializationid: 0,
+          specializationid: SPECIALIZATIONS[0].value,
         }
       },
       async create() {
